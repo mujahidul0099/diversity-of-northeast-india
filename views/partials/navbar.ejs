@@ -1,15 +1,24 @@
+<%# views/partials/navbar.ejs %>
 <nav class="navbar">
-    <a href="/" class="nav-brand">NE Diversity</a>
-    <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/states">States</a></li>
-        <li><a href="/tribes">Tribes</a></li>
-        <li><a href="/festivals">Festivals</a></li>
-        <li><a href="/food">Food</a></li>
-        <li><a href="/dresses">Dresses</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/feedback">Feedback</a></li>
-    </ul>
-    <%# Add mobile menu button/logic if needed for responsiveness %>
+    <div class="container"> <%# Wrapper div for alignment based on CSS %>
+        <a href="/" class="nav-brand">NE Diversity</a>
+
+        <%# Hamburger Button (visible on mobile only) %>
+        <button id="mobile-menu-button" class="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+            ☰ <%# Hamburger icon (☰) %>
+        </button>
+
+        <%# Navigation Links - Add ID and initial mobile hidden class %>
+        <ul class="nav-links" id="nav-links-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/states">States</a></li>
+            <li><a href="/tribes">Tribes</a></li>
+            <li><a href="/festivals">Festivals</a></li>
+            <li><a href="/food">Food</a></li>
+            <li><a href="/dresses">Dresses</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/feedback">Feedback</a></li>
+        </ul>
+    </div>
 </nav>

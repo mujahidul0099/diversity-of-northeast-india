@@ -1,18 +1,19 @@
-<%- include('partials/header', { title: title }) %>
+<%- include('partials/header', { title: 'Home' }) %> <%# Pass specific title %>
 
 <h1>Welcome to the Diversity of Northeast India</h1>
-<p>Discover the rich cultures, traditions, tribes, festivals, food, and natural beauty of India's fascinating Northeast region.</p>
+<p class="mb-2">Explore the vibrant cultures, breathtaking landscapes, unique traditions, and rich heritage of India's fascinating Northeast region, comprising Sikkim and the Seven Sister States.</p>
 
 <section class="featured-content">
-    <h2>Explore</h2>
+    <h2>Discover the Region</h2>
     <ul>
-        <li><a href="/states">States & Regions</a></li>
-        <li><a href="/tribes">Indigenous Tribes</a></li>
-        <li><a href="/festivals">Vibrant Festivals</a></li>
-        <li><a href="/food">Unique Cuisine</a></li>
-        <li><a href="/dresses">Traditional Attire</a></li>
+        <li><a href="/states">Explore the States</a></li>
+        <li><a href="/tribes">Meet the Indigenous Tribes</a></li>
+        <li><a href="/festivals">Experience the Vibrant Festivals</a></li>
+        <li><a href="/food">Taste the Unique Cuisine</a></li>
+        <li><a href="/dresses">Admire the Traditional Attire</a></li>
     </ul>
-    <%# You can add dynamically fetched content here later, like featured tribes %>
+    <%# You could add dynamically fetched featured content here later %>
+    <%# Example: Loop through featured tribes from database %>
 </section>
 
 <%- include('partials/footer') %>

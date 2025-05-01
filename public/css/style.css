@@ -16,6 +16,7 @@
     --base-spacing: 1rem;
     --border-radius: 5px;
     --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --navbar-height-desktop: 60px; /* Approximate height for reference */
 }
 
 /* --- Basic Reset & Defaults --- */
@@ -27,35 +28,45 @@
     padding: 0;
 }
 
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-family: var(--font-primary);
     line-height: 1.7;
     background-color: var(--light-color);
     color: var(--dark-color);
     font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* NO MORE BODY PADDING TOP HERE */
 }
 
 .container {
     max-width: var(--container-width);
-    margin: 0 auto; /* Center the container */
-    padding: 0 calc(var(--base-spacing) * 1.5); /* 24px padding */
-    overflow: hidden; /* Clear floats if any */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 calc(var(--base-spacing) * 1.5);
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-secondary);
     font-weight: 700;
-    margin-bottom: calc(var(--base-spacing) * 0.75); /* 12px */
+    margin-bottom: calc(var(--base-spacing) * 0.75);
     line-height: 1.3;
     color: var(--primary-color);
 }
 
-h1 { font-size: 2.5rem; } /* 40px */
-h2 { font-size: 2rem; }   /* 32px */
-h3 { font-size: 1.5rem; } /* 24px */
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
 
 p {
-    margin-bottom: var(--base-spacing); /* 16px */
+    margin-bottom: var(--base-spacing);
 }
 
 a {
@@ -65,7 +76,7 @@ a {
 }
 
 a:hover {
-    color: #2980b9; /* Darker blue on hover */
+    color: #2980b9;
 }
 
 ul {
@@ -73,52 +84,62 @@ ul {
 }
 
 img {
-    max-width: 100%; /* Make images responsive by default */
+    max-width: 100%;
     height: auto;
+    display: block;
 }
 
 /* --- Navbar Styling --- */
 .navbar {
     background: var(--primary-color);
     color: var(--white-color);
-    padding: var(--base-spacing) 0; /* 16px top/bottom */
+    padding: calc(var(--base-spacing) * 0.5) 0; /* Reduce padding slightly */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    position: sticky; /* Optional: make navbar stick */
+    position: sticky; /* Keep sticky */
     top: 0;
-    z-index: 10;
-    margin-bottom: calc(var(--base-spacing) * 2); /* Add space below navbar */
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    flex-shrink: 0;
+    min-height: var(--navbar-height-desktop); /* Ensure min height */
 }
 
 .navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative; /* Needed for absolute positioning of mobile menu */
 }
 
 .nav-brand {
     color: var(--white-color);
-    font-size: 1.8rem; /* 28.8px */
+    font-size: 1.8rem;
     font-weight: 700;
     font-family: var(--font-secondary);
+    z-index: 1001; /* Ensure brand is above mobile menu if overlapping */
 }
 
 .nav-brand:hover {
     color: var(--light-color);
 }
 
+/* --- Desktop Navigation Links --- */
 .nav-links {
-    display: flex;
+    display: flex; /* Visible on desktop */
+    align-items: center;
 }
 
 .nav-links li {
-    margin-left: calc(var(--base-spacing) * 1.25); /* 20px */
+    margin-left: calc(var(--base-spacing) * 1.25);
 }
 
 .nav-links a {
     color: var(--light-color);
-    padding: 0.5rem 0.8rem; /* 8px 12.8px */
+    padding: 0.5rem 0.8rem;
     border-radius: var(--border-radius);
     transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
 }
 
 .nav-links a:hover {
@@ -126,202 +147,279 @@ img {
     color: var(--white-color);
 }
 
+/* --- Hamburger Menu Button --- */
+.mobile-menu-toggle {
+    display: none; /* Hidden on desktop */
+    background: transparent;
+    border: none;
+    color: var(--white-color);
+    font-size: 1.8rem; /* Make icon larger */
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    line-height: 1; /* Prevent extra spacing */
+    z-index: 1001; /* Ensure button is above mobile menu */
+}
+
 /* --- Main Content Area --- */
 main.container {
-    padding-top: var(--base-spacing);
-    padding-bottom: calc(var(--base-spacing) * 2); /* More space at the bottom */
+    flex-grow: 1;
+    padding-top: calc(var(--base-spacing) * 2); /* Restore normal padding */
+    padding-bottom: calc(var(--base-spacing) * 2);
 }
 
-/* --- Form Styling --- */
-.form-wrapper { /* Add this class around your forms if needed for styling */
+/* --- Form Styling (Keep as is) --- */
+.form-wrapper {
     background: var(--white-color);
-    padding: calc(var(--base-spacing) * 2); /* 32px */
+    padding: calc(var(--base-spacing) * 2);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    margin-top: var(--base-spacing);
-    max-width: 600px; /* Limit form width */
-    margin-left: auto;
-    margin-right: auto;
+    margin: var(--base-spacing) auto calc(var(--base-spacing) * 2) auto;
+    max-width: 600px;
 }
+.form-group { margin-bottom: calc(var(--base-spacing) * 1.25); }
+.form-group label { display: block; margin-bottom: calc(var(--base-spacing) * 0.5); font-weight: 600; color: #555; }
+.form-group input[type="text"], .form-group input[type="email"], .form-group input[type="number"], .form-group select, .form-group textarea { width: 100%; padding: calc(var(--base-spacing) * 0.75); border: 1px solid var(--grey-color); border-radius: var(--border-radius); font-family: inherit; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; line-height: 1.5; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--secondary-color); box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2); }
+.form-group textarea { resize: vertical; min-height: 120px; }
 
-.form-group {
-    margin-bottom: calc(var(--base-spacing) * 1.25); /* 20px */
-}
+/* --- Button Styling (Keep as is) --- */
+.btn { display: inline-block; background: var(--secondary-color); color: var(--white-color); padding: calc(var(--base-spacing) * 0.75) calc(var(--base-spacing) * 1.5); border: none; cursor: pointer; border-radius: var(--border-radius); font-family: var(--font-secondary); font-weight: 700; font-size: 1rem; text-align: center; transition: background-color 0.3s ease, transform 0.2s ease; line-height: 1.5; }
+.btn:hover { background-color: #2980b9; transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.contact-form button[type="submit"], .feedback-form button[type="submit"] { width: 100%; margin-top: var(--base-spacing); }
 
-.form-group label {
-    display: block;
-    margin-bottom: calc(var(--base-spacing) * 0.5); /* 8px */
-    font-weight: 600;
-    color: #555;
-}
+/* --- Success/Error Messages (Keep as is) --- */
+.status-message { padding: var(--base-spacing); margin-bottom: var(--base-spacing); border: 1px solid transparent; border-radius: var(--border-radius); font-weight: 600; }
+.success-message { color: #1a5c3a; background-color: #d4edda; border-color: #c3e6cb; }
+.error-message { color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="number"], /* Added number for rating */
-.form-group select, /* Added select for rating */
-.form-group textarea {
-    width: 100%;
-    padding: calc(var(--base-spacing) * 0.75); /* 12px */
-    border: 1px solid var(--grey-color);
-    border-radius: var(--border-radius);
-    font-family: inherit; /* Use body font */
-    font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
+/* --- Footer (Keep as is) --- */
+.site-footer { text-align: center; padding: calc(var(--base-spacing) * 1.5) var(--base-spacing); background: #34495e; color: var(--light-color); font-size: 0.9rem; width: 100%; margin-top: auto; flex-shrink: 0; }
+.site-footer p { margin-bottom: 0; }
+.site-footer a { color: var(--white-color); font-weight: 600; }
+.site-footer a:hover { color: var(--secondary-color); }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2); /* Subtle focus ring */
-}
-
-.form-group textarea {
-    resize: vertical; /* Allow vertical resize */
-    min-height: 120px;
-}
-
-/* --- Button Styling --- */
-.btn {
-    display: inline-block;
-    background: var(--secondary-color);
-    color: var(--white-color);
-    padding: calc(var(--base-spacing) * 0.75) calc(var(--base-spacing) * 1.5); /* 12px 24px */
-    border: none;
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    font-family: var(--font-secondary);
-    font-weight: 700;
-    font-size: 1rem;
-    text-align: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn:hover {
-    background-color: #2980b9; /* Darker blue */
-    transform: translateY(-2px); /* Slight lift effect */
-}
-
-.btn:active {
-    transform: translateY(0); /* Press down effect */
-}
-
-/* Apply btn class to submit buttons */
-button[type="submit"] {
-    /* Inherit most styles from .btn */
-}
-.contact-form button[type="submit"],
-.feedback-form button[type="submit"] {
-    width: 100%; /* Make form buttons full width */
-     margin-top: var(--base-spacing);
-}
-
-
-/* --- Success/Error Messages --- */
-.message {
-    padding: var(--base-spacing);
-    margin-bottom: var(--base-spacing);
-    border: 1px solid transparent;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-}
-
-.success-message {
-    color: #1a5c3a; /* Darker Green */
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-}
-
-.error-message {
-    color: #721c24; /* Darker Red */
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-}
-
-/* --- Footer --- */
-.site-footer {
-    text-align: center;
-    margin-top: calc(var(--base-spacing) * 3); /* 48px */
-    padding: calc(var(--base-spacing) * 2); /* 32px */
-    background: #34495e; /* Slightly lighter than navbar */
-    color: var(--light-color);
-    font-size: 0.9rem;
-}
-
-.site-footer p {
-    margin-bottom: 0;
-}
-
-.site-footer a {
-    color: var(--white-color);
-    font-weight: 600;
-}
-.site-footer a:hover {
-    color: var(--secondary-color);
-}
-
-/* --- Utility Classes --- */
+/* --- Utility Classes (Keep as is) --- */
 .text-center { text-align: center; }
 .mb-1 { margin-bottom: var(--base-spacing); }
 .mb-2 { margin-bottom: calc(var(--base-spacing) * 2); }
 
+
+/* =========================== */
 /* --- RESPONSIVE DESIGN --- */
+/* =========================== */
+
+/* Styles for Mobile (768px and below) */
 @media (max-width: 768px) {
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.75rem; }
-    h3 { font-size: 1.3rem; }
+    /* REMOVE body padding-top rule */
 
-    .navbar .container {
-        flex-direction: column;
-        align-items: center; /* Center brand and links when stacked */
+    .navbar {
+        min-height: 55px; /* Adjust min-height for mobile */
     }
 
-    .nav-brand {
-         margin-bottom: var(--base-spacing);
-         text-align: center;
+    /* Show hamburger button */
+    .mobile-menu-toggle {
+        display: block; /* Show the button */
     }
 
+    /* Style the Nav Links container for Mobile */
     .nav-links {
-        flex-direction: column;
+        display: none; /* Hide links by default on mobile */
+        flex-direction: column; /* Stack items vertically */
+        position: absolute; /* Position relative to .navbar .container */
+        top: 100%; /* Position below the navbar */
+        left: 0;
         width: 100%;
-        margin-top: var(--base-spacing);
+        background-color: var(--primary-color); /* Match navbar background */
+        padding: var(--base-spacing) 0; /* Add padding */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for separation */
+        border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator line */
+        max-height: calc(100vh - 60px); /* Limit height */
+        overflow-y: auto; /* Allow scrolling if links exceed height */
     }
+
+    /* --- THIS CLASS IS ADDED/REMOVED BY JAVASCRIPT --- */
+    .nav-links.mobile-menu-active {
+        display: flex; /* Show the menu when active */
+    }
+    /* ------------------------------------------------ */
 
     .nav-links li {
-        margin: calc(var(--base-spacing) * 0.5) 0; /* 8px */
-        text-align: center;
+        margin-left: 0; /* Remove desktop horizontal margin */
         width: 100%;
+        text-align: center;
     }
 
     .nav-links a {
-        display: block;
-        padding: calc(var(--base-spacing) * 0.75); /* 12px */
-        background-color: rgba(255, 255, 255, 0.05); /* Slight background for clarity */
+        padding: calc(var(--base-spacing) * 0.8) var(--base-spacing); /* Adjust padding for vertical items */
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Separator between links */
     }
-     .nav-links a:hover {
-         background-color: rgba(255, 255, 255, 0.15);
-     }
+    .nav-links li:last-child a {
+        border-bottom: none; /* Remove border from last item */
+    }
 
-    .form-wrapper {
-        padding: calc(var(--base-spacing) * 1.5); /* Reduce padding on small screens */
+    .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: var(--white-color);
     }
+
+
+    /* Adjustments for other elements if needed */
+    main.container {
+        padding-top: var(--base-spacing); /* Reduce top padding */
+    }
+     h1 { font-size: 2rem; }
+     h2 { font-size: 1.75rem; }
+     .form-wrapper { padding: calc(var(--base-spacing) * 1.5); width: 95%; }
 }
 
+/* Styles for Very Small Screens (480px and below) */
 @media (max-width: 480px) {
      :root {
-         --base-spacing: 0.8rem; /* Slightly reduce base spacing */
+         --base-spacing: 0.8rem;
      }
      body { font-size: 15px; }
      h1 { font-size: 1.8rem; }
      h2 { font-size: 1.5rem; }
+     .navbar { min-height: 50px; }
+     .mobile-menu-toggle { font-size: 1.6rem; }
+     .container { padding: 0 var(--base-spacing); }
+     .contact-form button[type="submit"], .feedback-form button[type="submit"] { font-size: 0.95rem; padding: calc(var(--base-spacing) * 0.8) calc(var(--base-spacing) * 1.2); }
+     .form-wrapper { padding: var(--base-spacing); width: 98%; }
+}
 
-     .container {
-         padding: 0 var(--base-spacing);
-     }
+/* --- Ensure Desktop styles override mobile menu specifics --- */
+@media (min-width: 769px) {
+    /* Hide hamburger */
+    .mobile-menu-toggle {
+        display: none;
+    }
 
-      .contact-form button[type="submit"],
-      .feedback-form button[type="submit"] {
-          font-size: 0.95rem;
-      }
+    /* Ensure nav links are displayed correctly */
+    .nav-links {
+        display: flex !important; /* Use !important to override potential JS inline styles if needed, though class toggle is better */
+        flex-direction: row;
+        position: static; /* Override absolute positioning */
+        width: auto;
+        background-color: transparent; /* Override mobile background */
+        padding: 0;
+        box-shadow: none;
+        border-top: none;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .nav-links li {
+        margin-left: calc(var(--base-spacing) * 1.25);
+        width: auto;
+        text-align: left;
+    }
+
+    .nav-links a {
+        padding: 0.5rem 0.8rem;
+        width: auto;
+        border-bottom: none;
+    }
+    .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--white-color);
+    }
+}
+
+/* --- Tribe Page Specific Styles --- */
+
+.tribe-grid {
+    display: grid;
+    /* Create 3 columns on larger screens */
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(var(--base-spacing) * 1.5); /* Gap between cards */
+    margin-top: calc(var(--base-spacing) * 2); /* Space above the grid */
+}
+
+.tribe-card {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden; /* Ensures image corners are rounded if needed */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Use flexbox for card layout */
+    flex-direction: column; /* Stack image and body vertically */
+}
+
+.tribe-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+.tribe-card img {
+    width: 100%;
+    height: 200px; /* Fixed height for images */
+    object-fit: cover; /* Cover the area, cropping if necessary */
+    display: block; /* Remove extra space below image */
+    background-color: #eee; /* Background for placeholder */
+}
+
+.tribe-card-body {
+    padding: var(--base-spacing);
+    flex-grow: 1; /* Allows body to take remaining space */
+    display: flex;
+    flex-direction: column;
+}
+
+.tribe-card-body h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: calc(var(--base-spacing) * 0.5);
+}
+
+.tribe-card-body p {
+    font-size: 0.95rem;
+    color: #555; /* Slightly muted text color */
+    line-height: 1.6;
+    flex-grow: 1; /* Push link to bottom */
+    margin-bottom: var(--base-spacing);
+}
+
+.card-link {
+    display: inline-block; /* Make it block-like */
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-decoration: none;
+    margin-top: auto; /* Pushes link to bottom of card body */
+    align-self: flex-start; /* Align link to the start */
+}
+
+.card-link:hover {
+    text-decoration: underline;
+    color: #2980b9; /* Darker blue */
+}
+
+/* --- Responsive Adjustments for Tribe Grid --- */
+
+/* Medium screens (e.g., tablets) - 2 columns */
+@media (max-width: 992px) {
+    .tribe-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--base-spacing);
+    }
+}
+
+/* Small screens (e.g., large phones) - 1 column */
+@media (max-width: 576px) {
+    .tribe-grid {
+        grid-template-columns: 1fr; /* Single column */
+        gap: calc(var(--base-spacing) * 1.2);
+    }
+
+    .tribe-card img {
+        height: 180px; /* Slightly reduce image height */
+    }
+
+     .tribe-card-body h3 {
+        font-size: 1.2rem;
+    }
+     .tribe-card-body p {
+        font-size: 0.9rem;
+    }
 }

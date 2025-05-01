@@ -1,0 +1,37 @@
+<%- include('partials/header', { title: 'Feedback' }) %>
+
+<div class="form-wrapper"> <%# Wrapper for consistent form styling %>
+    <h1>Share Your Feedback</h1>
+
+    <%# Display success or error messages %>
+    <% if (locals.feedbackSent) { %>
+        <p class="success-message">Thank you! Your feedback has been submitted successfully. We appreciate your input!</p>
+    <% } else if (locals.error) { %>
+        <p class="error-message"><%= error %></p>
+    <% } %>
+
+    <%# Show the form only if feedback hasn't been sent %>
+    <% if (!locals.feedbackSent) { %>
+        <p>We value your opinion! Let us know how we can improve the website or what you liked.</p>
+        <form action="/feedback" method="POST" class="feedback-form">
+            <div class="form-group">
+                <label for="rating">Overall Rating (Optional):</label>
+                <select id="rating" name="rating">
+                    <option value="">-- Select a Rating --</option>
+                    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                    <option value="4">⭐⭐⭐⭐ Good</option>
+                    <option value="3">⭐⭐⭐ Average</option>
+                    <option value="2">⭐⭐ Fair</option>
+                    <option value="1">⭐ Poor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="comment">Your Comments:</label>
+                <textarea id="comment" name="comment" rows="6" required placeholder="Please provide details..."></textarea>
+            </div>
+            <button type="submit" class="btn">Submit Feedback</button> <%# Use the .btn class %>
+        </form>
+    <% } %>
+</div>
+
+<%- include('partials/footer') %>

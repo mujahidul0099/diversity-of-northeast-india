@@ -1,0 +1,10 @@
+<%- include('partials/header', { title: typeof title !== 'undefined' ? title : 'Not Found' }) %>
+
+<div class="container text-center">
+    <h1>404 - Page Not Found</h1>
+    <p>Sorry, we couldn't find the page you were looking for:</p>
+    <p><code><%= typeof url !== 'undefined' ? url : 'Requested page' %></code></p>
+    <p><a href="/" class="btn">Go Back Home</a></p>
+</div>
+
+<%- include('partials/footer') %>
