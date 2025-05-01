@@ -423,3 +423,129 @@ main.container {
         font-size: 0.9rem;
     }
 }
+
+
+
+/* --- States List Styling (Optional) --- */
+.states-overview {
+    margin-top: calc(var(--base-spacing) * 1.5);
+    margin-bottom: calc(var(--base-spacing) * 1.5);
+}
+
+.states-list {
+    list-style: none; /* Remove default bullets */
+    padding-left: 0; /* Remove default padding */
+    margin-top: var(--base-spacing);
+}
+
+.states-list li {
+    background-color: var(--white-color); /* Light background for each item */
+    padding: var(--base-spacing);
+    margin-bottom: calc(var(--base-spacing) * 0.75);
+    border-radius: var(--border-radius);
+    border-left: 5px solid var(--secondary-color); /* Accent border */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.states-list li strong {
+    color: var(--primary-color);
+    display: block; /* Make state name appear on its own line */
+    margin-bottom: calc(var(--base-spacing) * 0.3);
+    font-size: 1.1rem;
+}
+
+/* Optional horizontal rule styling */
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+    margin-top: calc(var(--base-spacing) * 1.5);
+    margin-bottom: calc(var(--base-spacing) * 1.5); /* Ensure consistency */
+}
+
+
+/* --- Festival Page Specific Styles (Similar to Tribe Styles) --- */
+
+.festival-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(var(--base-spacing) * 1.5);
+    margin-top: calc(var(--base-spacing) * 2);
+}
+
+.festival-card {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.festival-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.festival-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    background-color: #eee;
+}
+
+.festival-card-body {
+    padding: var(--base-spacing);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.festival-card-body h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: calc(var(--base-spacing) * 0.5);
+}
+
+.festival-card-body p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: var(--base-spacing);
+}
+
+/* --- Responsive Adjustments for Festival Grid --- */
+@media (max-width: 992px) {
+    .festival-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--base-spacing);
+    }
+}
+
+@media (max-width: 576px) {
+    .festival-grid {
+        grid-template-columns: 1fr;
+        gap: calc(var(--base-spacing) * 1.2);
+    }
+    .festival-card img { height: 180px; }
+    .festival-card-body h3 { font-size: 1.2rem; }
+    .festival-card-body p { font-size: 0.9rem; }
+}
+
+/* Ensure .card-link style applies (it's generic) */
+.card-link {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-decoration: none;
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.card-link:hover {
+    text-decoration: underline;
+    color: #2980b9;
+}
