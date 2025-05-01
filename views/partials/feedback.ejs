@@ -1,0 +1,33 @@
+<%- include('partials/header', { title: title }) %>
+
+<h1>Share Your Feedback</h1>
+
+<% if (locals.feedbackSent) { %>
+    <p class="success-message">Thank you! Your feedback has been submitted successfully.</p>
+<% } else if (locals.error) { %>
+     <p class="error-message"><%= error %></p>
+<% } %>
+
+<% if (!locals.feedbackSent) { %>
+    <p>We value your opinion. Please let us know what you think about the website or suggest improvements.</p>
+    <form action="/feedback" method="POST" class="feedback-form">
+        <div class="form-group">
+            <label for="rating">Rating (Optional):</label>
+            <select id="rating" name="rating">
+                <option value="">-- Select Rating --</option>
+                <option value="5">5 - Excellent</option>
+                <option value="4">4 - Good</option>
+                <option value="3">3 - Average</option>
+                <option value="2">2 - Fair</option>
+                <option value="1">1 - Poor</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" rows="5" required></textarea>
+        </div>
+        <button type="submit">Submit Feedback</button>
+    </form>
+<% } %>
+
+<%- include('partials/footer') %>
